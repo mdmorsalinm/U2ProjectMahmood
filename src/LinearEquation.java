@@ -12,31 +12,60 @@ public class LinearEquation {
     }
 
     public double distance() {
-        return Math.sqrt((double)(x2 - x1) + (y2 - y1));
+        return roundedToHundredth(Math.sqrt((double)(x2 - x1) + (y2 - y1)));
     }
 
     public double slope() {
-        return ((double) (y2 - y1)/(x2 - x1));
+        return roundedToHundredth((double) (y2 - y1)/(x2 - x1));
     }
 
     public double yIntercept() {
-        return (y1 - (slope() * x1));
+        return roundedToHundredth(y1 - (slope() * x1));
     }
 
     public String equation() {
-        if (y1 == y2){
-            return "y = " + yIntercept();
-        } else {
-            return "y = " + (y2 - y1) + "/" + (x2 - x1) + " + " + yIntercept();
+        String str = "y = ";
+        if (y1 == y2 || x1 == x2){
+            str += yIntercept();
+            return str;
         }
+        if (slope() == 1) {
+            str += "x ";
+        } else if (slope() == -1) {
+            str += "-x ";
+        } else if (slope() == (int) slope()) {
+            str += (int) slope() + "x ";
+        } else if (slope() < 0) {
+            str += "-" + Math.abs(y2 - y1) + "/" + Math.abs(x2 - x1) + "x ";
+        } else if (slope() > 0) {
+            str += Math.abs(y2 - y1) + "/" + Math.abs(x2 - x1) + "x ";
+        }
+        if (yIntercept() ==  0) {
+            return str;
+        } else if (yIntercept() > 0) {
+            str += "+ " + yIntercept();
+        } else if (yIntercept() < 0) {
+            str += "- " + Math.abs(yIntercept());
+        }
+        return str;
+
     }
 
-    public double roundedToHundredth(double toRound) {
+    private double roundedToHundredth(double toRound) {
         return Math.round(toRound * 100) / 100.0;
     }
 
     public String coordinateForX(double x) {
         double y = (x * slope()) + yIntercept();
         return "(" + x + ", " + y + ")";
+    }
+
+    public String lineInfo() {
+        String str = "The two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ")" + "\n";
+        str += "The equation of the line between these points is: " + equation() + "\n";
+        str += "The slope of this line is: " + slope() + "\n";
+        str += "The y-intercept of this line is: " + yIntercept() + "\n";
+        str += "The distance between these points is " + distance();
+        return str;
     }
 }

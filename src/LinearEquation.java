@@ -12,7 +12,7 @@ public class LinearEquation {
     }
 
     public double distance() {
-        return roundedToHundredth(Math.sqrt((double)(x2 - x1) + (y2 - y1)));
+        return roundedToHundredth(Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2)));
     }
 
     public double slope() {
@@ -64,8 +64,8 @@ public class LinearEquation {
         String str = "The two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ")" + "\n";
         str += "The equation of the line between these points is: " + equation() + "\n";
         str += "The slope of this line is: " + slope() + "\n";
-        str += "The y-intercept of this line is: " + yIntercept() + "\n";
-        str += "The distance between these points is " + distance();
+        str += "The y-intercept of the line is: " + yIntercept() + "\n";
+        str += "The distance between the points is " + distance();
         return str;
     }
 }

@@ -65,7 +65,7 @@ public class LinearEquation {
         str += "The equation of the line between these points is: " + equation() + "\n";
         str += "The slope of this line is: " + slope() + "\n";
         str += "The y-intercept of the line is: " + yIntercept() + "\n";
-        str += "The distance between the points is " + distance();
+        str += "The distance between the two points is " + distance();
         return str;
     }
 }
